@@ -1,0 +1,14 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:krzkaczor/test-repo.git",
+  "author": "Krzysztof Kaczor <chris@kaczor.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "nightmare": "^2.10.0"
+  },
+  "scripts": {
+    "test": "mkdir -p screenshots && node test-e2e/index.js"
+  }
+}
