@@ -1,0 +1,15 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:krzkaczor/test-repo.git",
+  "author": "Krzysztof Kaczor <chris@kaczor.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "nightmare": "atkinchris/nightmare",
+    "visreg": "^0.0.1"
+  },
+  "scripts": {
+    "test": "mkdir -p screenshots && node test-e2e/index.js && visreg  --compare-with master --repo krzkaczor/vis-reg --api-url http://139.59.157.217:3000 ./screenshots/**.png"
+  }
+}
