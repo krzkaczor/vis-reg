@@ -6,7 +6,7 @@
   "author": "Krzysztof Kaczor <chris@kaczor.io>",
   "license": "MIT",
   "devDependencies": {
-    "nightmare": "^2.10.0",
+    "nightmare": "atkinchris/nightmare",
     "visreg": "^0.0.1"
   },
   "scripts": {
