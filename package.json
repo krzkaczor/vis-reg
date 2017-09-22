@@ -6,9 +6,10 @@
   "author": "Krzysztof Kaczor <chris@kaczor.io>",
   "license": "MIT",
   "devDependencies": {
-    "nightmare": "^2.10.0"
+    "nightmare": "^2.10.0",
+    "visreg": "^0.0.1"
   },
   "scripts": {
-    "test": "mkdir -p screenshots && node test-e2e/index.js"
+    "test": "mkdir -p screenshots && node test-e2e/index.js && visreg  --compare-with master --repo krzkaczor/vis-reg --api-url http://139.59.157.217:3000 ./screenshots/**.png"
   }
 }
