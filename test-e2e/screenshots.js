@@ -4,7 +4,7 @@ async function getRealHeight(nightmare) {
 
 async function makeScreenshot(nightmare, name, width) {
   const initialHeight = 600; // this should not be important
-  await nightmare.viewport(width, 600);
+  await nightmare.viewport(width, 100);
   await nightmare.wait(200);
 
   const realHeight = await getRealHeight(nightmare);

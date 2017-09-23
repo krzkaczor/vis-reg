@@ -11,7 +11,19 @@ async function main() {
 
   await screenshots(nightmare, "index");
 
-  await await nightmare.end();
+  const t = await nightmare.evaluate(() => {
+    return document.title;
+  });
+  console.log("Title", t);
+  if (t !== "TESTPAGE"){
+    console.log("TITLE DOESNT MATCH!:", nightmare.title());
+    throw new Error("TITLE DOESNT MATCH!:")
+  }
+
+  await nightmare.end();
 }
 
-main().catch(console.error);
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
