@@ -841,13 +841,13 @@ request-promise-core@1.1.1:
     lodash "^4.13.1"
 
 request-promise@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/request-promise/-/request-promise-4.2.1.tgz#7eec56c89317a822cbfea99b039ce543c2e15f67"
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/request-promise/-/request-promise-4.2.2.tgz#d1ea46d654a6ee4f8ee6a4fea1018c22911904b4"
   dependencies:
     bluebird "^3.5.0"
     request-promise-core "1.1.1"
     stealthy-require "^1.1.0"
-    tough-cookie ">=2.3.0"
+    tough-cookie ">=2.3.3"
 
 request@^2.45.0, request@^2.82.0:
   version "2.82.0"
@@ -1046,7 +1046,7 @@ through2@~0.2.3:
     readable-stream "~1.1.9"
     xtend "~2.1.1"
 
-tough-cookie@>=2.3.0:
+tough-cookie@>=2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"
   dependencies:
@@ -1103,9 +1103,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-visreg@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/visreg/-/visreg-0.0.1.tgz#0addcb478d8c7a54e4d2c83daf1b23b89ba4ad72"
+visreg@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/visreg/-/visreg-0.0.3.tgz#82d92467f132660971587aa25cc743321c69bcb3"
   dependencies:
     command-line-args "^4.0.7"
     git-rev-sync "^1.9.1"
