@@ -10,6 +10,6 @@
     "visreg": "^0.0.1"
   },
   "scripts": {
-    "test": "mkdir -p screenshots && node test-e2e/index.js && visreg  --compare-with master --repo krzkaczor/vis-reg --api-url http://e8e20b39.ngrok.io:3000 ./screenshots/**.png && ls -all ./screenshots/"
+    "test": "mkdir -p screenshots && node test-e2e/index.js && visreg  --compare-with master --repo krzkaczor/vis-reg --api-url http://e8e20b39.ngrok.io ./screenshots/**.png && ls -all ./screenshots/"
   }
 }
