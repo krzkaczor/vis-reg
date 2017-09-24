@@ -2,6 +2,33 @@ async function getRealHeight(nightmare) {
   return nightmare.evaluate(() => document.body.scrollHeight);
 }
 
+async function getScrollbarWidth(nighmare) {
+  return nightmare.evaluate(() => {
+    var outer = document.createElement("div");
+    outer.style.visibility = "hidden";
+    outer.style.width = "100px";
+    outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
+
+    document.body.appendChild(outer);
+
+    var widthNoScroll = outer.offsetWidth;
+    // force scrollbars
+    outer.style.overflow = "scroll";
+
+    // add innerdiv
+    var inner = document.createElement("div");
+    inner.style.width = "100%";
+    outer.appendChild(inner);
+
+    var widthWithScroll = inner.offsetWidth;
+
+    // remove divs
+    outer.parentNode.removeChild(outer);
+
+    return widthNoScroll - widthWithScroll;
+  });
+}
+
 async function makeScreenshot(nightmare, name, width) {
   // const initialHeight = 1; // this should not be important
   // await nightmare.viewport(width, initialHeight);
@@ -11,6 +38,9 @@ async function makeScreenshot(nightmare, name, width) {
   // console.log("real height: ", realHeight);
   // await nightmare.viewport(width, realHeight);
   // await nightmare.wait(1000);
+
+  const width = await getScrollbarWidth();
+  console.log("Scrollbar width: ", width);
 
   await nightmare.viewport(width, 20);
 
@@ -22,4 +52,4 @@ module.exports.screenshots = async function screenshots(nightmare, name) {
   await makeScreenshot(nightmare, name, 375); // iphone 6
   console.log("Desktop screenshot");
   await makeScreenshot(nightmare, name, 1500); // desktop
-}
+};
