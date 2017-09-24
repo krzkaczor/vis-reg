@@ -2,7 +2,7 @@ async function getRealHeight(nightmare) {
   return nightmare.evaluate(() => document.body.scrollHeight);
 }
 
-async function getScrollbarWidth(nighmare) {
+async function getScrollbarWidth(nightmare) {
   return nightmare.evaluate(() => {
     var outer = document.createElement("div");
     outer.style.visibility = "hidden";
@@ -39,8 +39,8 @@ async function makeScreenshot(nightmare, name, width) {
   // await nightmare.viewport(width, realHeight);
   // await nightmare.wait(1000);
 
-  const width = await getScrollbarWidth();
-  console.log("Scrollbar width: ", width);
+  const scrollWidth = await getScrollbarWidth(nightmare);
+  console.log("Scrollbar width: ", scrollWidth);
 
   await nightmare.viewport(width, 20);
 
