@@ -3,17 +3,14 @@ async function getRealHeight(nightmare) {
 }
 
 async function makeScreenshot(nightmare, name, width) {
-  // const initialHeight = 1; // this should not be important
-  // await nightmare.viewport(width, initialHeight);
-  // await nightmare.wait(1000);
+  const initialHeight = 1; // this should not be important
+  await nightmare.viewport(width, initialHeight);
+  await nightmare.wait(1000);
 
   const realHeight = await getRealHeight(nightmare);
   console.log("real height: ", realHeight);
-  // await nightmare.viewport(width, realHeight);
-  // await nightmare.wait(1000);
-
-  await nightmare.viewport(width, 600);
-  await nightmare.wait(2000);
+  await nightmare.viewport(width, realHeight);
+  await nightmare.wait(1000);
 
   await nightmare.screenshot(`./screenshots/${name}-${width}.png`);
 }
