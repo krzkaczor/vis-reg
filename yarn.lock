@@ -1103,9 +1103,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-visreg@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/visreg/-/visreg-0.0.5.tgz#db258e447beb1ba274e0d62403906bc877fb640b"
+visreg@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/visreg/-/visreg-0.0.6.tgz#f2b7e9ff7a26b10f29896b1570be4efe52dd0ed1"
   dependencies:
     command-line-args "^4.0.7"
     git-rev-sync "^1.9.1"
