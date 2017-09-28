@@ -1,4 +1,8 @@
-const { stitchImages } = require('./images')
+const { finalize } = require('./images')
+const { join } = require('path');
+const mkdirp = require('mkdirp-promise');
+const rimraf = require('rimraf-then');
+
 async function getRealHeight(nightmare) {
   return nightmare.evaluate(() => document.body.scrollHeight);
 }
@@ -47,7 +51,8 @@ async function getVieportSize(nightmare) {
 async function scrollTo(nightmare, y) {
   return nightmare.evaluate((y) => window.scrollTo(0, y), y);
 }
-
+// put everything to dir first and remove it after finish
+// add more logging to backend
 async function makeScreenshot(nightmare, name, width) {
   const scrollWidth = await getScrollbarWidth(nightmare);
   console.log("Scrollbar width: ", scrollWidth);
@@ -66,6 +71,9 @@ async function makeScreenshot(nightmare, name, width) {
   const documentHeight = await getRealHeight(nightmare);
   console.log("Real height: ", documentHeight);
 
+  const baseDir = join(__dirname, '../screenshots', `${name}-${width}`);
+  await mkdirp(baseDir);
+
   const images = [];
   const heights = [];
   const offsets = [];
@@ -74,16 +82,23 @@ async function makeScreenshot(nightmare, name, width) {
   while (currentHeight < documentHeight) {
     console.log(`Screenshot ${i} at ${currentHeight}`)
     await scrollTo(nightmare, currentHeight);
-    const imagePath = `./screenshots/${name}-${width}-${i++}.png`;
+    const imagePath = join(baseDir, `${name}-${width}-${i++}.png`);
+    await nightmare.wait(800);
     await nightmare.screenshot(imagePath);
-    await nightmare.wait(2000);
     currentHeight += viewportSize.height;
     images.push(imagePath);
     heights.push(viewportSize.height);
     offsets.push(currentHeight < documentHeight ? 0 : currentHeight - documentHeight)
   }
 
-  stitchImages(images, heights, offsets, `./screenshots/${name}-${width}.png`);
+  const desiredDimensions = {
+    width,
+    height: viewportSize.height
+  }
+
+  await finalize(images, desiredDimensions, offsets[offsets.length - 1], `./screenshots/${name}-${width}.png`);
+
+  await rimraf(baseDir);
 
   console.log("DONE")
 } 

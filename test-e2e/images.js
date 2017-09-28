@@ -1,21 +1,50 @@
 const gm = require("gm");
 
-function stitchImages(images, heights, offsets, outputname) {
-  let acc = gm();
+function preprocess(path, desiredDimensions) {
+  return new Promise((resolve, reject) => {
+    gm(path)
+      .resize(desiredDimensions.width, desiredDimensions.height)
+      .crop(0,0)
+      .write(path, function (err) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve();
+      });
+  })
+}
 
-  if (images.length != heights.length) {
-    throw new Error("Error: images.length != heights.length ");
+function stitchImages(images, height, lastOffset, outputName) {
+  return new Promise((resolve, reject) => {
+    let acc = gm();
+    
+    let currentHeight = 0;
+    for (var i = 0; i < images.length; i++) {
+      const isLast = i === images.length - 1;
+      acc = acc.in("-page", `+0+${isLast? currentHeight-lastOffset: currentHeight}`).in(images[i]);
+      currentHeight += height;
+    }
+  
+    acc.mosaic().write(outputName, function(err) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  })
+}
+
+// crop sidebar
+// crop navbar
+async function finalize(images, desiredDimensions, lastOffset, outputName) {
+  for(const image of images) {
+    await preprocess(image, desiredDimensions);
   }
 
-  let h = 0;
-  for (var i = 0; i < images.length; i++) {
-    acc = acc.in("-page", `+0+${h - offsets[i]}`).in(images[i]);
-    h += heights[i] - offsets[i];
-  }
-
-  acc.mosaic().write(outputname, function(err) {
-    if (err) console.log(err);
-  });
+  await stitchImages(images, desiredDimensions.height, lastOffset, outputName)
 }
 
 module.exports.stitchImages = stitchImages;
+module.exports.finalize = finalize;
