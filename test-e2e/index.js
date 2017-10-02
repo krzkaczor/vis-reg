@@ -12,6 +12,7 @@ const { default: Fullscreenshot } = require('fullscreenshooter');
     basePath,
     navbarOffset: 61,
     unreveal: true,
+    disableAnimations: ['#react-root svg'],
     widths: [350, 1500],
     puppeteer: page
   })
