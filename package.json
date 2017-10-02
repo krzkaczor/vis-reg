@@ -6,16 +6,21 @@
   "author": "Krzysztof Kaczor <chris@kaczor.io>",
   "license": "MIT",
   "devDependencies": {
+    "fullscreenshooter": "^0.0.1",
     "gm": "^1.23.0",
-    "nightmare": "atkinchris/nightmare",
+    "nightmare": "segmentio/nightmare",
     "rimraf-then": "^1.0.1",
     "visreg": "^0.0.6"
   },
   "scripts": {
-    "test": "mkdir -p screenshots && node test-e2e/index.js && visreg --compare-with master --repo krzkaczor/vis-reg --api-url http://139.59.157.217:3000 \"./screenshots/**.png\" --pr $TRAVIS_PULL_REQUEST",
-    "test:local": "rm -rf screenshots && mkdir -p screenshots && node test-e2e/index.js"
+    "test": "mkdir -p screenshots && node test-e2e/index.js",
+    "test:local": "mkdir -p screenshots && rm -rf screenshots/* && node test-e2e/index.js"
   },
   "dependencies": {
-    "mkdirp-promise": "^5.0.1"
+    "bluebird": "^3.5.0",
+    "global": "^4.3.2",
+    "http-server": "^0.10.0",
+    "mkdirp-promise": "^5.0.1",
+    "puppeteer": "^0.11.0"
   }
 }

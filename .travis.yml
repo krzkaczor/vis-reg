@@ -1,15 +1,10 @@
+dist: trusty
 language: node_js
 node_js:
   - "8"
 notifications:
   email: false
-addons:
-  apt:
-    packages:
-      - xvfb
 install:
   - sudo apt-get update
   - sudo apt-get install imagemagick graphicsmagick
-  - export DISPLAY=':99.0'
-  - Xvfb :99 -screen 0 2048x10000x24 > /dev/null 2>&1 &
   - yarn
